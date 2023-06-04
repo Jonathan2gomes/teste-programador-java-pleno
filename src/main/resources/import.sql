@@ -28,4 +28,5 @@ values (1003, 5.50, 'Guaraná', 'Lata');
 
 -- INSERT ORDERS
 
--- insert into order_schema (id, id_customer, id_product, quantidade)
+insert into order_schema (dataemissao, valortotal, id, descricao, listaprodutos)
+values ('2023-01-01', 6, 10000, 'Pedido 1', '{1000, 1001}');

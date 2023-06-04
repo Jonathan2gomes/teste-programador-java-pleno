@@ -26,6 +26,12 @@ public class Order {
         this.valorTotal = valorTotal;
     }
 
+    public Order(String descricao, List<Long> listaProdutos) {
+        this.descricao = descricao;
+        this.listaProdutos = listaProdutos;
+    }
+
+
     public Long getId() {
         return id;
     }

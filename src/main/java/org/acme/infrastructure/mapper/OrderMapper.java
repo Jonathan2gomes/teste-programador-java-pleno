@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 
 public class OrderMapper {
     public static List<Order> toOrder(List<OrderSchema> list) {
-       return list.stream().map(n -> new Order(
-                n.getId(),
-                n.getDataEmissao(),
-                n.getDescricao(),
-                n.getListaProdutos(),
-                n.getValorTotal()
+       return list.stream().map(schema -> new Order(
+                schema.getId(),
+                schema.getDataEmissao(),
+                schema.getDescricao(),
+                schema.getListaProdutos(),
+                schema.getValorTotal()
         )).collect(Collectors.toList());
 
     }

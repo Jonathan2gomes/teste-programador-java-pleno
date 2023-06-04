@@ -9,4 +9,10 @@ public interface OrderGateway {
     void create(Order order);
 
     List<Order> getAll();
+
+    Order findById(Long id);
+
+    void update(Order order, Long id);
+
+    void delete(Long id);
 }

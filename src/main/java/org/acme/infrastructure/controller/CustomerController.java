@@ -50,10 +50,10 @@ public class CustomerController {
     }
 
     @PUT
-    @Path("/update/{id}")
+    @Path("/update/{codigo}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("id") Long id, @RequestBody @Valid CustomerInput input) {
+    public Response update(@PathParam("codigo") Long id, @RequestBody @Valid CustomerInput input) {
         updateCustomerUseCase.execute(id, input);
 
         return Response.status(Response.Status.OK).build();

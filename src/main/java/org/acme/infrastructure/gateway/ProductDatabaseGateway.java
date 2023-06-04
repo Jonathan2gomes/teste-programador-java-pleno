@@ -10,6 +10,9 @@ import org.acme.infrastructure.config.db.repository.ProductRepository;
 import org.acme.infrastructure.config.db.schema.ProductSchema;
 import org.acme.infrastructure.mapper.ProductMapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @ApplicationScoped
 @Transactional
 public class ProductDatabaseGateway implements ProductGateway {
@@ -57,5 +60,15 @@ public class ProductDatabaseGateway implements ProductGateway {
                 productSchema.getDescricao(),
                 productSchema.getUnidade(),
                 productSchema.getValor());
+    }
+
+    @Override
+    public List<Product> findByIds(List<Long> productIds) {
+        List<ProductSchema> productSchema = productRepository.list("id in ?1", productIds);
+        return productSchema.stream().map(product -> new Product(
+                product.getId(),
+                product.getDescricao(),
+                product.getUnidade(),
+                product.getValor())).collect(Collectors.toList());
     }
 }

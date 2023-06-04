@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
+@Entity(name = "order_schema")
 public class OrderSchema {
 
     @Id

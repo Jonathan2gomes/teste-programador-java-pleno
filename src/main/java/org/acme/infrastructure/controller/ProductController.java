@@ -34,8 +34,8 @@ public class ProductController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{id}")
-    public Response getProductById(@PathParam("id") Long id) {
+    @Path("/{codigo}")
+    public Response getProductById(@PathParam("codigo") Long id) {
 
         return Response.ok(getProductUseCase.execute(id)).build();
     }
