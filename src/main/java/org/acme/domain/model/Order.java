@@ -11,14 +11,14 @@ public class Order {
 
     private String descricao;
 
-    private List<Product> listaProdutos;
+    private List<Long> listaProdutos;
 
     private Double valorTotal;
 
     public Order() {
     }
 
-    public Order(Long id, LocalDate dataEmissao, String descricao, List<Product> listaProdutos, Double valorTotal) {
+    public Order(Long id, LocalDate dataEmissao, String descricao, List<Long> listaProdutos, Double valorTotal) {
         this.id = id;
         this.dataEmissao = dataEmissao;
         this.descricao = descricao;
@@ -50,11 +50,11 @@ public class Order {
         this.descricao = descricao;
     }
 
-    public List<Product> getListaProdutos() {
+    public List<Long> getListaProdutos() {
         return listaProdutos;
     }
 
-    public void setListaProdutos(List<Product> listaProdutos) {
+    public void setListaProdutos(List<Long> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
 

@@ -1,4 +1,4 @@
 package org.acme.usecase.customer;
 
-public record CustomerOutput(String nome, String telefone, String cpf, String email) {
+public record CustomerOutput(Long codigo, String nome, String telefone, String cpf, String email) {
 }
