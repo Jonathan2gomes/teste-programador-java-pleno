@@ -7,7 +7,9 @@ import org.acme.domain.gateway.OrderGateway;
 import org.acme.domain.model.Order;
 import org.acme.infrastructure.config.db.repository.OrderRepository;
 import org.acme.infrastructure.config.db.schema.OrderSchema;
+import org.acme.infrastructure.mapper.CustomerMapper;
 import org.acme.infrastructure.mapper.OrderMapper;
+import org.acme.infrastructure.mapper.ProductMapper;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,20 +21,26 @@ public class OrderDatabaseGateway implements OrderGateway {
 
     private final OrderRepository orderRepository;
     private final ProductDatabaseGateway productGateway;
+    private final CustomerDatabaseGateway customerGateway;
 
-    public OrderDatabaseGateway(OrderRepository orderRepository, ProductDatabaseGateway productGateway){
+    public OrderDatabaseGateway(OrderRepository orderRepository, ProductDatabaseGateway productGateway, CustomerDatabaseGateway customerGateway){
         this.orderRepository = orderRepository;
         this.productGateway = productGateway;
+        this.customerGateway = customerGateway;
     };
     @Override
     public void create(Order order) {
-        orderRepository.persist(new OrderSchema(
+        OrderSchema schema = new OrderSchema(
                 null,
                 LocalDate.now(),
                 order.getDescricao(),
-                order.getListaProdutos(),
-                calculateTotalValue(order)
-        ));
+                ProductMapper.fromProductListToSchemaList(order.getListaProdutos().stream().map(productGateway::findById).toList()),
+                calculateTotalValue(order),
+                CustomerMapper.fromCustomerToCustomerSchema(customerGateway.findById(order.getCustomerId())));
+
+        System.out.println(schema);
+
+        orderRepository.persist(schema);
     }
 
     @Override
@@ -47,8 +55,10 @@ public class OrderDatabaseGateway implements OrderGateway {
                 orderSchema.getId(),
                 orderSchema.getDataEmissao(),
                 orderSchema.getDescricao(),
-                orderSchema.getListaProdutos(),
-                orderSchema.getValorTotal()
+                productGateway.findAllIds(orderSchema.getListaProdutos()),
+                orderSchema.getValorTotal(),
+                orderSchema.getCustomerSchema().getId()
+
         );
     }
 
@@ -56,7 +66,7 @@ public class OrderDatabaseGateway implements OrderGateway {
     public void update(Order order, Long id) {
         OrderSchema orderSchema = orderRepository.findByIdOptional(id).orElseThrow(() -> new OrderNotFoundException("Pedido não foi encontrado"));
         orderSchema.setDescricao(order.getDescricao());
-        orderSchema.setListaProdutos(order.getListaProdutos());
+        orderSchema.setListaProdutos(ProductMapper.fromProductListToSchemaList(order.getListaProdutos().stream().map(productGateway::findById).toList()));
         orderSchema.setValorTotal(calculateTotalValue(order));
         orderRepository.persist(orderSchema);
     }

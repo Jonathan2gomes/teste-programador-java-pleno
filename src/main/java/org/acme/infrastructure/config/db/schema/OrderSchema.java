@@ -18,8 +18,12 @@ public class OrderSchema {
     @Column
     private String descricao;
 
-    @Column
-    private List<Long> listaProdutos;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerSchema customerSchema;
+
+    @ManyToMany
+    private List<ProductSchema> listaProdutos;
 
     @Column
     private Double valorTotal;
@@ -27,12 +31,13 @@ public class OrderSchema {
     public OrderSchema() {
     }
 
-    public OrderSchema(Long id, LocalDate dataEmissao, String descricao, List<Long> listaProdutos, Double valorTotal) {
+    public OrderSchema(Long id, LocalDate dataEmissao, String descricao, List<ProductSchema> listaProdutos, Double valorTotal, CustomerSchema customerSchema) {
         this.id = id;
         this.dataEmissao = dataEmissao;
         this.descricao = descricao;
         this.listaProdutos = listaProdutos;
         this.valorTotal = valorTotal;
+        this.customerSchema = customerSchema;
     }
 
     public Long getId() {
@@ -59,11 +64,11 @@ public class OrderSchema {
         this.descricao = descricao;
     }
 
-    public List<Long> getListaProdutos() {
+    public List<ProductSchema> getListaProdutos() {
         return listaProdutos;
     }
 
-    public void setListaProdutos(List<Long> listaProdutos) {
+    public void setListaProdutos(List<ProductSchema> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
 
@@ -73,5 +78,13 @@ public class OrderSchema {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public CustomerSchema getCustomerSchema() {
+        return customerSchema;
+    }
+
+    public void setCustomerSchema(CustomerSchema customerSchema) {
+        this.customerSchema = customerSchema;
     }
 }

@@ -2,6 +2,7 @@ package org.acme.infrastructure.mapper;
 
 import org.acme.domain.model.Order;
 import org.acme.infrastructure.config.db.schema.OrderSchema;
+import org.acme.infrastructure.config.db.schema.ProductSchema;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,8 +13,9 @@ public class OrderMapper {
                 schema.getId(),
                 schema.getDataEmissao(),
                 schema.getDescricao(),
-                schema.getListaProdutos(),
-                schema.getValorTotal()
+                schema.getListaProdutos().stream().mapToLong(ProductSchema::getId).boxed().collect(Collectors.toList()),
+                schema.getValorTotal(),
+                schema.getCustomerSchema().getId()
         )).collect(Collectors.toList());
 
     }

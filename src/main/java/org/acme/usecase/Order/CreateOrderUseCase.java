@@ -18,7 +18,8 @@ public class CreateOrderUseCase {
         validateOrderInput(orderInput);
         Order order = new Order(
                 orderInput.descricao(),
-                orderInput.listaProdutos()
+                orderInput.listaProdutos(),
+                orderInput.customerId()
                 );
 
         orderGateway.create(order);

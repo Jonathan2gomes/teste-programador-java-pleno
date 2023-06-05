@@ -71,4 +71,14 @@ public class ProductDatabaseGateway implements ProductGateway {
                 product.getUnidade(),
                 product.getValor())).collect(Collectors.toList());
     }
+
+//    @Override
+//    public List<Long> findIdsByIds(List<Long> idList) {
+//        return null;
+//    }
+
+    public List<Long> findAllIds(List<ProductSchema> productSchema) {
+
+        return productSchema.stream().map(ProductSchema::getId).toList();
+    }
 }

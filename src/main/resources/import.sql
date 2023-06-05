@@ -26,7 +26,27 @@ values (1002, 4.50, 'Sprite', 'Lata');
 insert into product_schema (id, valor, descricao, unidade)
 values (1003, 5.50, 'Guaraná', 'Lata');
 
+insert into product_schema (id, valor, descricao, unidade)
+values (1004, 6.50, 'Pepsi', 'Lata');
+
+insert into product_schema (id, valor, descricao, unidade)
+values (1005, 7.50, 'Sukita', 'Lata');
+
 -- INSERT ORDERS
 
-insert into order_schema (dataemissao, valortotal, id, descricao, listaprodutos)
-values ('2023-01-01', 6, 10000, 'Pedido 1', '{1000, 1001}');
+insert into order_schema (dataemissao, valortotal, customer_id, id, descricao)
+values ('2023-01-01', 6, 100, 10000, 'Pedido 1');
+
+insert into order_schema (dataemissao, valortotal, customer_id, id, descricao)
+values ('2023-01-01', 6, 101, 10001, 'Pedido 2');
+
+-- insert order_schema+product_schema
+
+insert into order_schema_product_schema (listaprodutos_id, order_schema_id)
+values (1000, 10000);
+
+insert into order_schema_product_schema (listaprodutos_id, order_schema_id)
+values (1001, 10001);
+
+-- insert into order_schema (dataemissao, valortotal, id, descricao, listaprodutos)
+-- values ('2023-01-01', 6, 10000, 'Pedido 1', '{1000, 1001}');

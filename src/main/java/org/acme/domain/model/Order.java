@@ -15,20 +15,24 @@ public class Order {
 
     private Double valorTotal;
 
+    private Long customerId;
+
     public Order() {
     }
 
-    public Order(Long id, LocalDate dataEmissao, String descricao, List<Long> listaProdutos, Double valorTotal) {
+    public Order(Long id, LocalDate dataEmissao, String descricao, List<Long> listaProdutos, Double valorTotal, Long customerId) {
         this.id = id;
         this.dataEmissao = dataEmissao;
         this.descricao = descricao;
         this.listaProdutos = listaProdutos;
         this.valorTotal = valorTotal;
+        this.customerId = customerId;
     }
 
-    public Order(String descricao, List<Long> listaProdutos) {
+    public Order(String descricao, List<Long> listaProdutos, Long customerId) {
         this.descricao = descricao;
         this.listaProdutos = listaProdutos;
+        this.customerId = customerId;
     }
 
 
@@ -70,5 +74,13 @@ public class Order {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 }

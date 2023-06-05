@@ -17,7 +17,8 @@ public class UpdateOrderUseCase {
     public void execute(OrderInput input, Long id){
         orderGateway.update(new Order(
                 input.descricao(),
-                input.listaProdutos()
+                input.listaProdutos(),
+                input.customerId()
         ), id);
     }
 

@@ -19,4 +19,6 @@ public interface ProductGateway {
     Product findById(Long id);
 
     List<Product> findByIds(List<Long> idList);
+
+//    List<Long> findIdsByIds(List<Long> idList);
 }
